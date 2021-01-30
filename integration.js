@@ -1,3 +1,4 @@
+var ahfm_start = true
 function update() {
     return {
         "playbackStatus": getPlaybackStatus(),
@@ -5,7 +6,7 @@ function update() {
         "canGoNext": false,
         "canGoPrevious": false,
         "canAddToFavorites": false,
-        "volume": setVolume(1.0),
+        "volume": getVolume(),
         "duration": 0,
         "position": 0,
         "songId": 0,
@@ -28,6 +29,12 @@ function pause() {$("#jp_jplayer_0").jPlayer("pause")}
 function goNext() {}
 function goPrevious() {}
 function setVolume(volume) {$("#jp_jplayer_0").jPlayer("volume", volume)}
+function getVolume() {
+    if (ahfm_start) {
+        setVolume(1.0);
+        ahfm_start = false;
+    } else return $("#jp_jplayer_0").jPlayer("option","volume");
+}
 function addToFavorites() {}
 function removeFromFavorites() {}
 function seekToPosition(position) {}
